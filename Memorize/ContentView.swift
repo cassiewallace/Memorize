@@ -10,11 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     @State var emojis: Array = ["🍀", "🌲", "🌴", "🌵", "🌳", "🌿", "🐚", "🍁", "🪸", "🍄", "🪨", "🌷", "🌺", "🌻", "☀️", "🌈", "🌊", "❄️", "🌾", "🌱", "💨", "🌚", "🪷", "🎋", "💦"]
-    @State var emojiCount: Int = 12
+    @State var numberOfCards: Int = 12
+    @State var cardWidth: CGFloat = 65
     
-    @discardableResult func setTheme(theme: String) -> (emojis: Array<Any>, emojiCount: Int) {
-        
-        emojiCount = Int.random(in: 4...24)
+    func setTheme(theme: String) {
+        numberOfCards = Int.random(in: 4...24)
+        cardWidth = 60 + (24 - CGFloat(numberOfCards))/6 * 10
         
         switch theme {
             case "flags":
@@ -26,9 +27,9 @@ struct ContentView: View {
             default:
                 emojis = ["🍀", "🌲", "🌴", "🌵", "🌳", "🌿", "🐚", "🍁", "🪸", "🍄", "🪨", "🌷", "🌺", "🌻", "☀️", "🌈", "🌊", "❄️", "🌾", "🌱", "💨", "🌚", "🪷", "🎋", "💦"]
         }
-
-        return (emojis, emojiCount)
     }
+    
+//    func
     
     var body: some View {
         let shuffledEmojis = emojis.shuffled()
@@ -37,10 +38,10 @@ struct ContentView: View {
             Text("Memorize!")
                 .font(.largeTitle)
                 .fontWeight(.semibold)
-                .padding(.vertical)
+                .padding(.bottom)
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 55))]) {
-                    ForEach(shuffledEmojis[0..<emojiCount], id: \.self) { emoji in
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: cardWidth))]) {
+                    ForEach(shuffledEmojis[0..<numberOfCards], id: \.self) { emoji in
                         CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                     }
                 }
@@ -51,7 +52,6 @@ struct ContentView: View {
                 ButtonView(action: {self.setTheme(theme: "food")}, labelImage: "fork.knife", labelText: "Food")
                 ButtonView(action: {self.setTheme(theme: "flags")},labelImage: "flag", labelText: "Flags")
             }
-            .padding(.vertical)
         }
         .padding(.horizontal)
     }
@@ -109,6 +109,8 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
+                .previewDevice("iPhone 11")
+                .previewInterfaceOrientation(.portrait)
                 
                 
         }
