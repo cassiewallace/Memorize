@@ -31,8 +31,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 indexOfTheOneAndOnlyFaceUpCard = nil
             } else {
                 for index in cards.indices {
+                // We flip the cards of the previous pick, if they weren't a match.
                     cards[index].isFaceUp = false
-//                    We flip the cards of the previous pick here, if they weren't a match.
                 }
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }

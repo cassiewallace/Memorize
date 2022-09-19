@@ -13,18 +13,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 90 - 10 * (CGFloat(viewModel.numberOfPairsOfCards)/4)))]) {
-                        ForEach(viewModel.cards) {
-                            card in CardView(card: card)
-                                .aspectRatio(2/3, contentMode: .fit)
-                                .onTapGesture{
-                                    viewModel.choose(card)
-                                }
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 90 - 10 * (CGFloat(viewModel.numberOfPairsOfCards)/4)))]) {
+                            ForEach(viewModel.cards) {
+                                card in CardView(card: card, fillColor: viewModel.color)
+                                    .aspectRatio(2/3, contentMode: .fit)
+                                    .onTapGesture{
+                                        viewModel.choose(card)
+                                    }
+                            }
                         }
                     }
-                }
-                .foregroundColor(viewModel.color)
+                    .foregroundStyle(viewModel.color)
                 Text("Score: \(viewModel.score)")
                 .padding(.horizontal)
             }
@@ -46,6 +46,7 @@ struct ContentView: View {
 
 struct CardView: View {
     let card: MemoryGame<String>.Card
+    let fillColor: Color
     
     var body: some View {
         ZStack {
@@ -58,7 +59,11 @@ struct CardView: View {
                 shape.opacity(0)
             }
             else {
-                shape.fill()
+                if #available(iOS 16.0, *) {
+                    shape.fill(fillColor.gradient)
+                } else {
+                    shape.fill()
+                }
             }
         }
     }
