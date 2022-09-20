@@ -38,7 +38,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     var score: Int {
-        return memoryGameModel.score
+        return memoryGameModel.currentScore
     }
     
     // MARK: - Private Var(s)
