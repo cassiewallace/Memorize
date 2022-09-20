@@ -20,6 +20,7 @@
 		CBE5D81228D0EA6A0076FBDD /* MemorizeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5D81128D0EA6A0076FBDD /* MemorizeUITestsLaunchTests.swift */; };
 		CBEFABA228D9116B00273F61 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEFABA128D9116B00273F61 /* AspectVGrid.swift */; };
 		CBEFABA428D9212E00273F61 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEFABA328D9212E00273F61 /* Pie.swift */; };
+		CBEFABC428DA038D00273F61 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEFABC328DA038D00273F61 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		CBE5D81128D0EA6A0076FBDD /* MemorizeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CBEFABA128D9116B00273F61 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		CBEFABA328D9212E00273F61 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		CBEFABC328DA038D00273F61 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				CBE5D7F428D0EA5E0076FBDD /* MemorizeApp.swift */,
 				CBC0ADD828D8C6E3001B0EB6 /* EmojiMemoryGameView.swift */,
+				CBEFABC328DA038D00273F61 /* Card.swift */,
 				CBEFABA328D9212E00273F61 /* Pie.swift */,
 				CBEFABA128D9116B00273F61 /* AspectVGrid.swift */,
 				CBC0ADD728D8C6E3001B0EB6 /* Preview Content */,
@@ -283,6 +286,7 @@
 				CBEFABA428D9212E00273F61 /* Pie.swift in Sources */,
 				CBE5D7F528D0EA5E0076FBDD /* MemorizeApp.swift in Sources */,
 				CB2B2F1F28D38BD200F43F55 /* EmojiMemoryGame.swift in Sources */,
+				CBEFABC428DA038D00273F61 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
