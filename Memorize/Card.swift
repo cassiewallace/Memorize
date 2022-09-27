@@ -11,40 +11,41 @@ struct Card: View {
     let card: EmojiMemoryGame.Card
     let fillColor: Color
     
+    @State private var animatedBonusRemaining: Double = 0
+    
     var body: some View {
         GeometryReader(content: { geometry in
             ZStack {
-                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                if card.isFaceUp {
-                    shape.fill().foregroundColor(.white)
-                    shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
-                    Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 20))
-                        .padding(DrawingConstants.timerPadding)
-                        .opacity(DrawingConstants.timerOpacity)
-                    Text(card.content)
-                        .font(font(in: geometry.size))
-                } else if card.isMatched {
-                    shape.opacity(0)
-                }
-                else {
-                    if #available(iOS 16.0, *) {
-                        shape.fill(fillColor.gradient)
+                Group {
+                    if card.isConsumingBonusTime {
+                        Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-animatedBonusRemaining)*360-90))
+                            .onAppear {
+                                animatedBonusRemaining = card.bonusRemaining
+                                withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+                                    animatedBonusRemaining = 0
+                                }
+                            }
                     } else {
-                        shape.fill()
+                        Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-card.bonusRemaining)*360-90))
                     }
                 }
-            }
+                .padding(DrawingConstants.timerPadding)
+                .opacity(DrawingConstants.timerOpacity)
+                Text(card.content)
+                    .font(Font.system(size: DrawingConstants.fontSize))
+                    .scaleEffect(scale(thatFits: geometry.size))
+                }
+                .cardify(isFaceUp: card.isFaceUp, isMatched: card.isMatched, fillColor: fillColor)
         })
     }
-
-    private func font(in size: CGSize) -> Font {
-        Font.system(size: min(size.width, size.height) * DrawingConstants.fontScale)
+    
+    private func scale(thatFits size: CGSize) -> CGFloat {
+        min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
     }
     
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 10
-        static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.7
+        static let fontSize: CGFloat = 32
         static let timerPadding: CGFloat = 4
         static let timerOpacity: CGFloat = 0.5
     }
