@@ -104,7 +104,6 @@ struct EmojiMemoryGameView: View {
                     deal(card)
                 }
             }
-
         }
     }
     
